@@ -42,6 +42,17 @@ module.exports = class ICorsi {
             "method": "POST"
         });
         let courses = await res.json();
-        return courses[0].data;
+        return courses[0].data.courses;
+    }
+
+    async getCourseAttedancesLink(id) {
+        let res = await fetch(`https://www.icorsi.ch/course/view.php?id=${id}`, {
+            "headers": {
+                'Cookie': this.session.map(c => `${c.name}=${c.value}`).join('; ')
+            }
+        })
+        let body = await res.text();
+        let attedances = body.match(/href="https:\/\/www.icorsi.ch\/mod\/attendance\/view.php\?id=[0-9]+"/g);
+        return (attedances==null)?[]:attedances;
     }
 }

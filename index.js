@@ -8,7 +8,14 @@ async function main(){
     if(await icorsi.login(username, password)){
         console.log("Logged in!");
         let courses = await icorsi.getCourses();
-        console.log(courses);
+        console.log(courses.length)
+        for(let course of courses){
+            console.log(course.fullname);
+            let attedances = await icorsi.getCourseAttedancesLink(course.id);
+            for(let attedance of attedances){
+                console.log(attedance);
+            }
+        }
     }else{
         console.log("Login failed");
     }
