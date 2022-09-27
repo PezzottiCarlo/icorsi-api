@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "express": "^4.17.3",
     "node-fetch": "^2.6.7",
     "puppeteer": "^13.5.2"
   }
